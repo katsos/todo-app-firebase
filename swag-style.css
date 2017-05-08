@@ -2,6 +2,11 @@ a {
     cursor: pointer;
 }
 
+.list-group-item:nth-child(even) {
+    background-color: lightgrey;
+    border-color: white;
+}
+
 .my-navbar {
     margin-bottom: 20px;
     background-color: lightblue;
@@ -18,16 +23,22 @@ a {
     width: 89%;
 }
 
+#todo-container {
+    margin-bottom: 10px; 
+}
+
 #todo-list li {
     overflow: overlay;
 
     padding: 15px;
-    border: 1px solid lightgrey;
+    /*border: 1px solid lightgrey;*/
+    margin-bottom: 4px;
 }
 
 #todo-list li span {
     vertical-align: sub;
 }
+
 #todo-list li button {
     float: right;
 }
