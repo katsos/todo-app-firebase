@@ -25,7 +25,7 @@ const ELEM = {
     container: document.getElementById('todolist'),
     listContainer: document.getElementById('todo-list-container'),
     input: document.getElementById('todo-input'),
-    addButton: document.getElementById('btnAdd')
+    form: document.getElementById('todo-add-form')
   }
 };
 
@@ -92,9 +92,10 @@ function initalizeListeners() {
   });
 
   /* todo */
-  ELEM.todo.addButton.addEventListener('click', event => {
-    const input = ELEM.todo.input.value;
+  ELEM.todo.form.addEventListener('submit', event => {
+    event.preventDefault();
 
+    const input = ELEM.todo.input.value;
     /* do nothing if it is empty */
     if (!input.trim().length) return;
 
