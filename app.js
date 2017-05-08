@@ -22,7 +22,10 @@ const ELEM = {
     signUp: document.getElementById('signup-from')
   },
   todo: {
-    container: document.getElementById('todolist')
+    container: document.getElementById('todolist'),
+    listContainer: document.getElementById('todo-list-container'),
+    input: document.getElementById('todo-input'),
+    addButton: document.getElementById('btnAdd')
   }
 };
 
@@ -88,4 +91,26 @@ function initalizeListeners() {
       })
   });
 
+  /* todo */
+  ELEM.todo.addButton.addEventListener('click', event => {
+    const input = ELEM.todo.input.value;
+
+    /* do nothing if it is empty */
+    if (!input.trim().length) return;
+
+    // TODO: update database
+    addTodoItemInList(input);
+  });
+
+}
+
+function addTodoItemInList(text) {
+  const list = ELEM.todo.listContainer;
+
+  list.insertAdjacentHTML('beforeend', `
+    <li class="list-group-item">
+      <span>${text}</span>
+      <button id="btnDelete" type="submit" class="btn-primary">Delete</button>
+    </li>
+  `);
 }
