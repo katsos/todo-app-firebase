@@ -102,22 +102,20 @@
 
 		</section>
 
-		<section id="todolist" class="form-group hide">
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<h2>This is my TO DO List:</h2>
-				</div>
+		<section id="todolist" class="col-sm-offset-2 col-sm-10 hide">
+			<div id="todo-title">
+				<h3>My TO DO List:</h2>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<ul id="myToDoList" class="list-group">
-						<li class="list-group-item">Make an App!
-							<button id="btnDelete" type="submit" class="btn-primary">Delete</button></li>
-					</ul>
-				</div>
+			<div id="todo-list-container">
+				<ul id="todo-list" class="list-group">
+					<li class="list-group-item">
+						<span>Make an App!</span>
+						<button id="btnDelete" type="submit" class="btn-primary">Delete</button>
+					</li>
+				</ul>
 			</div>
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="text" placeholder="Add something to do list">
+			<div id="todo-add">
+				<input id="todo-input" type="text" placeholder="Add something a todo that is a think you have to do ?!?!?">
 				<button id="btnAdd" type="submit" class="btn-primary">Add</button>
 			</div>
 		</section>

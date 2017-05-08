@@ -13,3 +13,25 @@ a {
 .my-navbar div > * {
     margin: 10px;
 }
+
+#todo-input {
+    width: 89%;
+}
+
+#todo-list li {
+    overflow: overlay;
+
+    padding: 15px;
+    border: 1px solid lightgrey;
+}
+
+#todo-list li span {
+    vertical-align: sub;
+}
+#todo-list li button {
+    float: right;
+}
+
+#todo-add  button {
+    float: right;
+}

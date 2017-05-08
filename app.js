@@ -21,7 +21,9 @@ const ELEM = {
     signIn: document.getElementById('login-from'),
     signUp: document.getElementById('signup-from')
   },
-  todo: document.getElementById('todolist')
+  todo: {
+    container: document.getElementById('todolist')
+  }
 };
 
 
@@ -30,7 +32,7 @@ firebase.initializeApp(FB_CONFIG);
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     ELEM.nav.isUserSignedIn.classList.remove('hide');
-    ELEM.todo.classList.remove('hide');
+    ELEM.todo.container.classList.remove('hide');
   } else {
     ELEM.nav.isUserGuest.classList.remove('hide');
   }
