@@ -104,7 +104,7 @@ function initalizeListeners() {
     event.preventDefault();
 
     const input = ELEM.todo.input.value;
-    
+
     /* do nothing if it is empty */
     if (!input.trim().length) return;
 
@@ -118,16 +118,17 @@ function addTodosToViewListener() {
   todoDbList.on('value', snapshot => {
     /* parse data to proccess them*/
     const data = snapshot.toJSON();
-    
+    if (!data) return ELEM.todo.list.innerHTML = '';
+
     /* construct them in an array of {id: text} objects */
     const todos = Object.keys(data).map(id => {
-      return {id, text: data[id]};
+      return { id, text: data[id] };
     });
 
     /* reset rendered list */
     ELEM.todo.list.innerHTML = '';
     /* draw each item */
-    for(const todo of todos) addTodoItemInList(todo);
+    for (const todo of todos) addTodoItemInList(todo);
   });
 }
 
@@ -135,7 +136,11 @@ function addTodoItemInList(todo) {
   ELEM.todo.list.insertAdjacentHTML('beforeend', `
     <li id="todo-item-${todo.id}" class="list-group-item">
       <span>${todo.text}</span>
-      <button id="todo-delete-${todo.id}" class="btn-primary">Delete</button>
+      <button onclick="deleteTodoWithId('${todo.id.toString()}');" class="btn-primary">Delete</button>
     </li>
   `);
+}
+
+function deleteTodoWithId(id) {
+  todoDbList.child(id).set(null);
 }
