@@ -32,11 +32,18 @@ const ELEM = {
 
 
 firebase.initializeApp(FB_CONFIG);
+let database = null;
+let todoDbList = null;
+const auth = firebase.auth();
 
-firebase.auth().onAuthStateChanged(user => {
+auth.onAuthStateChanged(user => {
   if (user) {
     ELEM.nav.isUserSignedIn.classList.remove('hide');
     ELEM.todo.container.classList.remove('hide');
+
+    database = firebase.database();
+    todoDbList = database.ref(`users/${user.uid}/todoList`);
+    addTodosToViewListener();
   } else {
     ELEM.nav.isUserGuest.classList.remove('hide');
   }
@@ -56,7 +63,7 @@ function initalizeListeners() {
   });
 
   ELEM.nav.linkFor.logout.addEventListener('click', event => {
-    firebase.auth().signOut().then(refresh);
+    auth.signOut().then(refresh);
   });
 
   /* main */
@@ -64,7 +71,7 @@ function initalizeListeners() {
     event.preventDefault();
 
     data = serializeForm(this);
-    firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+    auth.createUserWithEmailAndPassword(data.email, data.password)
       .then(response => {
         console.log(response);
         alert('You have been signed up. You can use login now!');
@@ -80,7 +87,7 @@ function initalizeListeners() {
     event.preventDefault();
 
     data = serializeForm(this);
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+    auth.signInWithEmailAndPassword(data.email, data.password)
       .then(response => {
         console.log(response);
         alert('You have been signed in successfully!');
@@ -97,22 +104,38 @@ function initalizeListeners() {
     event.preventDefault();
 
     const input = ELEM.todo.input.value;
+    
     /* do nothing if it is empty */
     if (!input.trim().length) return;
 
-    // TODO: update database
-    addTodoItemInList(input);
+    todoDbList.push().set(input);
   });
 
 }
 
-function addTodoItemInList(text) {
-  const list = ELEM.todo.list;
+function addTodosToViewListener() {
+  /* on every value change */
+  todoDbList.on('value', snapshot => {
+    /* parse data to proccess them*/
+    const data = snapshot.toJSON();
+    
+    /* construct them in an array of {id: text} objects */
+    const todos = Object.keys(data).map(id => {
+      return {id, text: data[id]};
+    });
 
-  list.insertAdjacentHTML('beforeend', `
-    <li class="list-group-item">
-      <span>${text}</span>
-      <button id="btnDelete" type="submit" class="btn-primary">Delete</button>
+    /* reset rendered list */
+    ELEM.todo.list.innerHTML = '';
+    /* draw each item */
+    for(const todo of todos) addTodoItemInList(todo);
+  });
+}
+
+function addTodoItemInList(todo) {
+  ELEM.todo.list.insertAdjacentHTML('beforeend', `
+    <li id="todo-item-${todo.id}" class="list-group-item">
+      <span>${todo.text}</span>
+      <button id="todo-delete-${todo.id}" class="btn-primary">Delete</button>
     </li>
   `);
 }
