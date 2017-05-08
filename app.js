@@ -54,8 +54,7 @@ function initalizeListeners() {
   });
 
   ELEM.nav.linkFor.logout.addEventListener('click', event => {
-    event.preventDefault();
-    firebase.auth().signOut();
+    firebase.auth().signOut().then(refresh);
   });
 
   /* main */
@@ -65,10 +64,13 @@ function initalizeListeners() {
     data = serializeForm(this);
     firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
       .then(response => {
-
+        console.log(response);
+        alert('You have been signed up. You can use login now!');
+        refresh();
       })
       .catch(error => {
-
+        console.error(error);
+        alert('Error: ' + error.message);
       })
   });
 
@@ -78,10 +80,13 @@ function initalizeListeners() {
     data = serializeForm(this);
     firebase.auth().signInWithEmailAndPassword(data.email, data.password)
       .then(response => {
-
+        console.log(response);
+        alert('You have been signed in successfully!');
+        refresh();
       })
       .catch(error => {
-
+        alert('Error: ' + error.message);
+        console.error(error);
       })
   });
 
@@ -96,4 +101,8 @@ function serializeForm(formElement) {
   }
 
   return response;
+}
+
+function refresh() {
+  location.reload();
 }
