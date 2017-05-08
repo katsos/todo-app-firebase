@@ -7,18 +7,42 @@ const FB_CONFIG = {
     messagingSenderId: "773465329178"
 };
 
+const ELEM = {
+  nav: {
+    isUserSignedIn: document.getElementsByClassName('my-navbar-logged')[0],
+    isUserGuest: document.getElementsByClassName('my-navbar-guest')[0],
+    linkFor: {
+      signUp: document.getElementById('btnSignUp'),
+      signIn: document.getElementById('btnLogin'),
+      logout: document.getElementById('btnLogout')
+    }
+  },
+  form: {
+    signIn: document.getElementById('login-from'),
+    signUp: document.getElementById('signup-from'),
+    submit: {
+      signIn: document.getElementById('login-form-submit'),
+      signUp: document.getElementById('signup-form-submit')
+    }
+  }
+};
+
 
 (function(){
 
   firebase.initializeApp(FB_CONFIG);
 
   // vazoume ta elements sto dom
-  const elements = {
-    nav: {
-      isUserSignedIn: document.getElementsByClassName('my-navbar-logged'),
-      isUserGuest: document.getElementsByClassName('my-navbar-guest')
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      ELEM.nav.isUserSignedIn.classList.remove('hide');
+    } else {
+      ELEM.nav.isUserGuest.classList.remove('hide');
     }
-  };
+  });
+
+  initalizeListeners();
 
 /*
   const txtEmail = document.getElementById('txtEmail');
@@ -59,10 +83,27 @@ const FB_CONFIG = {
     const promise = auth.createUserWithEmailAndPassword(email,pass);
     promise.catch(e => console.log (e.message));
   });
-
-  btnLogout.addEventListener('click', e =>{
-    firebase.auth().signOut();
-  });
 */
 
 }());
+
+function initalizeListeners() {
+
+  /* nav */
+  ELEM.nav.linkFor.signUp.addEventListener('click', () => {
+    ELEM.form.signUp.classList.toggle('hide');
+  });
+
+  ELEM.nav.linkFor.signIn.addEventListener('click', () => {
+    ELEM.form.signIn.classList.toggle('hide');
+  });
+
+  ELEM.nav.linkFor.logout.addEventListener('click', event => {
+    event.preventDefault();
+    firebase.auth().signOut();
+  });
+
+  /* main */
+
+
+}
