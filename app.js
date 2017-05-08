@@ -19,11 +19,7 @@ const ELEM = {
   },
   form: {
     signIn: document.getElementById('login-from'),
-    signUp: document.getElementById('signup-from'),
-    submit: {
-      signIn: document.getElementById('login-form-submit'),
-      signUp: document.getElementById('signup-form-submit')
-    }
+    signUp: document.getElementById('signup-from')
   }
 };
 
@@ -66,7 +62,7 @@ const ELEM = {
 
     //sign in
 
-    const promise = auth.signInWithEmailAndPassword(email,pass);
+    const promise = ;
     promise.catch(e => console.log (e.message));
 
   });
@@ -104,6 +100,41 @@ function initalizeListeners() {
   });
 
   /* main */
+  ELEM.form.signUp.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    data = serializeForm(this);
+    firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+      .then(response => {
 
+      })
+      .catch(error => {
 
+      })
+  });
+
+  ELEM.form.signIn.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    data = serializeForm(this);
+    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+      .then(response => {
+
+      })
+      .catch(error => {
+
+      })
+  });
+
+}
+
+function serializeForm(formElement) {
+  const inputs = formElement.querySelectorAll('input:not([type=submit])');
+  const response = {};
+
+  for (const input of inputs) {
+    Object.assign(response, {[input.name] : input.value});
+  }
+
+  return response;
 }
