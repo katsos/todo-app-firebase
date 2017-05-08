@@ -22,8 +22,9 @@ const ELEM = {
     signUp: document.getElementById('signup-from')
   },
   todo: {
-    container: document.getElementById('todolist'),
+    container: document.getElementById('todo-container'),
     listContainer: document.getElementById('todo-list-container'),
+    list: document.getElementById('todo-list'),
     input: document.getElementById('todo-input'),
     form: document.getElementById('todo-add-form')
   }
@@ -106,7 +107,7 @@ function initalizeListeners() {
 }
 
 function addTodoItemInList(text) {
-  const list = ELEM.todo.listContainer;
+  const list = ELEM.todo.list;
 
   list.insertAdjacentHTML('beforeend', `
     <li class="list-group-item">
