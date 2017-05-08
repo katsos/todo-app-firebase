@@ -65,22 +65,4 @@ const FB_CONFIG = {
   });
 */
 
-  // add a realtime listener
-
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    debugger;
-    if(firebaseUser) {
-      console.log(firebaseUser);
-      btnLogout.classList.remove('hide');
-      everything.classList.add('hide');
-      todolidt.classList.remove('hide');
-    } else {
-      console.log('not logged in');
-      btnLogout.classList.add('hide');
-      everything.classList.remove('hide');
-      todolidt.classList.add('hide');
-    }
-
-  });
-
 }());
