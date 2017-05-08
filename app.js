@@ -1,4 +1,4 @@
-var FB_CONFIG = {
+const FB_CONFIG = {
     apiKey: "AIzaSyD636iUl9DB6v_mRbcdb4WU_GOLTZt43I4",
     authDomain: "todoapp-a6f6a.firebaseapp.com",
     databaseURL: "https://todoapp-a6f6a.firebaseio.com",
