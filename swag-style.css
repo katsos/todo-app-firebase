@@ -1,0 +1,11 @@
+.my-navbar {
+    margin-bottom: 20px;
+    background-color: lightblue;
+
+    text-align: right;
+    padding: 5px;
+}
+
+.my-navbar div > * {
+    margin: 10px;
+}

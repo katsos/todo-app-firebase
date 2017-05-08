@@ -1,96 +1,118 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>To Do List Web App</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<head>
+	<meta charset="utf-8">
+	<title>To Do List Web App</title>
+
+	<link rel="stylesheet" 
+				href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+				integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+			 	crossorigin="anonymous"
+	/>
+	<link rel="stylesheet" href="swag-style.css"/>
+
 </head>
+
 <body style="background-color:#EEEEEE;">
 
+	<nav class="my-navbar">
+
+		<!-- if user is signed in-->
+		<div class="my-navbar-logged">
+			<span id="username"></span>
+			<a id="btnLogout">Logout</a>
+		</div>
+
+		<!-- if user is not signed in -->
+		<div class="my-navbar-guest">
+			<a id="btnSignUp">SignUp</a>
+			<a id="btnLogin">Login</a>
+		</div>
+		
+	</nav>
+
 	<div class="container">
-	 
-		<div id="everything" class="form-horizontal">
 
+		<section id="auth" class="form-horizontal">
+
+			<form id="signup-from">
+				<div class="form-group">
+					<label for="txtEmail" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="txtEmail" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="txtPassword" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="txtFullname" class="col-sm-2 control-label">Full Name</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="txtFullname" placeholder="Full Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="txtUsername" class="col-sm-2 control-label">Username</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="txtUsername" placeholder="Username">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="txtDate" class="col-sm-2 control-label">Date</label>
+					<div class="col-sm-10">
+						<input type="date" class="form-control" id="txtDate">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button id="btnSignUp" type="submit" class="btn btn-primary btn-block btn-default">Sign up</button>
+					</div>
+				</div>
+
+			</form>
+
+			<form id="login-from">
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button id="btnLogin" type="submit" class="btn btn-primary btn-block btn-default">Log In</button>
+					</div>
+				</div>
+			</form>
+
+		</section>
+
+		<section id="todolidt" class="form-group">
 			<div class="form-group">
-				<div class="col-sm-8 control-label">				
-		    		<h2 >Please Sign Up </h2>		    	
-		    	</div>
-		  </div>
-		  <div class="form-group">
-		    <label for="txtEmail" class="col-sm-2 control-label">Email</label>
-		    <div class="col-sm-10">
-		      <input type="email" class="form-control" id="txtEmail" placeholder="Email">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="txtPassword" placeholder="Password">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="txtFullname" class="col-sm-2 control-label">Full Name</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="txtFullname" placeholder="Full Name">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="txtUsername" class="col-sm-2 control-label">Username</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="txtUsername" placeholder="Username">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="txtDate" class="col-sm-2 control-label">Date</label>
-		    <div class="col-sm-10">
-		      <input type="date" class="form-control" id="txtDate" >
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button id="btnLogin" type="submit" class="btn btn-primary btn-block btn-default">Log In</button>
-		    </div>
-		  </div>
-
-		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button id="btnSignUp" type="submit" class="btn btn-primary btn-block btn-default">Sign up</button>
-		    </div>
-		  </div>
-
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-		     	<button id="btnLogout" type="submit" class="btn btn-primary btn-block btn-default hide">Log out</button>
+				<div class="col-sm-offset-2 col-sm-10">
+					<h2>This is my TO DO List:</h2>
+				</div>
 			</div>
-		</div>
-		<div id="todolidt" class="form-group">
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<h2>This is my TO DO List:</h2>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<ul id="myToDoList" class="list-group">
+						<li class="list-group-item">Make an App!
+							<button id="btnDelete" type="submit" class="btn-primary">Delete</button></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<ul id="myToDoList" class="list-group">
-					<li class="list-group-item">Make an App!   
-					<button id="btnDelete" type="submit" class="btn-primary">Delete</button></li>
-				</ul>
-			</div>
-		</div>
 			<div class="col-sm-offset-2 col-sm-10">
 				<input type="text" placeholder="Add something to do list">
 				<button id="btnAdd" type="submit" class="btn-primary">Add</button>
 			</div>
-		</div>
+		</section>
+
 	</div>
 
-  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="app.js"></script>
 
 </body>
+
 </html>
