@@ -20,7 +20,8 @@ const ELEM = {
   form: {
     signIn: document.getElementById('login-from'),
     signUp: document.getElementById('signup-from')
-  }
+  },
+  todo: document.getElementById('todolist')
 };
 
 
@@ -29,7 +30,7 @@ firebase.initializeApp(FB_CONFIG);
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     ELEM.nav.isUserSignedIn.classList.remove('hide');
-
+    ELEM.todo.classList.remove('hide');
   } else {
     ELEM.nav.isUserGuest.classList.remove('hide');
   }
