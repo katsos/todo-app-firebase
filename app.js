@@ -1,16 +1,16 @@
+var FB_CONFIG = {
+    apiKey: "AIzaSyD636iUl9DB6v_mRbcdb4WU_GOLTZt43I4",
+    authDomain: "todoapp-a6f6a.firebaseapp.com",
+    databaseURL: "https://todoapp-a6f6a.firebaseio.com",
+    projectId: "todoapp-a6f6a",
+    storageBucket: "todoapp-a6f6a.appspot.com",
+    messagingSenderId: "266129417099"
+};
+
 
 (function(){
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBndc1KqNIg9qxCfzfxzdUPkpntYLrbLPE",
-    authDomain: "to-do-list-project-50ac0.firebaseapp.com",
-    databaseURL: "https://to-do-list-project-50ac0.firebaseio.com",
-    projectId: "to-do-list-project-50ac0",
-    storageBucket: "to-do-list-project-50ac0.appspot.com",
-    messagingSenderId: "282717427866"
-  };
-  firebase.initializeApp(config);
+  firebase.initializeApp(FB_CONFIG);
 
   // vazoume ta elements sto dom
 
